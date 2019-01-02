@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="几道ctf题的wp">
+<meta name="description" content="几道ctf题的wp #0X01刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|">
 <meta name="keywords" content="ctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="几个ctf的wp">
 <meta property="og:url" content="http://yoursite.com/2018/12/29/几个ctf的wp/index.html">
 <meta property="og:site_name" content="TGAO&#39;s Blog">
-<meta property="og:description" content="几道ctf题的wp">
+<meta property="og:description" content="几道ctf题的wp #0X01刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-29T14:10:55.834Z">
+<meta property="og:updated_time" content="2019-01-02T10:57:37.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几个ctf的wp">
-<meta name="twitter:description" content="几道ctf题的wp">
+<meta name="twitter:description" content="几道ctf题的wp #0X01刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|">
 
 
 
@@ -330,11 +330,8 @@
       
 
       
-        <p>几道ctf题的wp</p>
-<a id="more"></a>
-<p>#0X01</p>
-<hr>
-<p><strong>刚看到这题感觉很像是phar反序列化</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">include_once($this-&gt;file_path);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p><strong>几道ctf题的wp</strong></p>
+<h2 id="0X01"><a href="#0X01" class="headerlink" title="#0X01"></a>#0X01</h2><p><strong>刚看到这题感觉很像是phar反序列化</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">include_once($this-&gt;file_path);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个类在整个页面没有被实例化，猜测是利用反序列化<br>再往下看，还有一处检验gif头标志的，也就是说只能上传gif文件<br>不过可以构造phar可以绕过，而且phar文件的meta_data是序列化后的<br><strong><em>利用phar实行反序列化有需要满足3个条件</em></strong></p>
 <blockquote>
 <ul>
@@ -583,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0X02"><span class="nav-number">1.</span> <span class="nav-text">#0X02</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0X01"><span class="nav-number">1.</span> <span class="nav-text">#0X01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0X02"><span class="nav-number">2.</span> <span class="nav-text">#0X02</span></a></li></ol></div>
             
 
           </div>
@@ -603,7 +600,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
