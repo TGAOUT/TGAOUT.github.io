@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#Phar反序列化刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|class)">
+<meta name="description" content="[TOC] #Phar反序列化  刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|histor">
 <meta name="keywords" content="ctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF题">
 <meta property="og:url" content="http://yoursite.com/2018/12/29/CTF题/index.html">
 <meta property="og:site_name" content="TGAO&#39;s Blog">
-<meta property="og:description" content="#Phar反序列化刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|class)">
+<meta property="og:description" content="[TOC] #Phar反序列化  刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|histor">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-02T16:23:49.584Z">
+<meta property="og:updated_time" content="2019-01-02T16:30:34.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF题">
-<meta name="twitter:description" content="#Phar反序列化刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|history|class)">
+<meta name="twitter:description" content="[TOC] #Phar反序列化  刚看到这题感觉很像是phar反序列化123456789class K0rz3n_secret_flag &amp;#123;    protected $file_path;    function __destruct()&amp;#123;        if(preg_match(&amp;apos;/(log|etc|session|proc|read_secret|histor">
 
 
 
@@ -342,7 +342,10 @@
       
 
       
-        <h2 id="Phar反序列化"><a href="#Phar反序列化" class="headerlink" title="#Phar反序列化"></a>#Phar反序列化</h2><p><strong>刚看到这题感觉很像是phar反序列化</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">include_once($this-&gt;file_path);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>[TOC]</p>
+<p>#Phar反序列化</p>
+<hr>
+<p><strong>刚看到这题感觉很像是phar反序列化</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class K0rz3n_secret_flag &#123;</span><br><span class="line">    protected $file_path;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if(preg_match(&apos;/(log|etc|session|proc|read_secret|history|class)/i&apos;, $this-&gt;file_path))&#123;</span><br><span class="line">            die(&quot;Sorry Sorry Sorry&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">include_once($this-&gt;file_path);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个类在整个页面没有被实例化，猜测是利用反序列化<br>再往下看，还有一处检验gif头标志的，也就是说只能上传gif文件<br>不过可以构造phar可以绕过，而且phar文件的meta_data是序列化后的<br><strong><em>利用phar实行反序列化有需要满足3个条件</em></strong></p>
 <blockquote>
 <ul>
@@ -600,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Phar反序列化"><span class="nav-number">1.</span> <span class="nav-text">#Phar反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Php之session序列化"><span class="nav-number">2.</span> <span class="nav-text">#Php之session序列化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Php之session序列化"><span class="nav-number">1.</span> <span class="nav-text">#Php之session序列化</span></a></li></ol></div>
             
 
           </div>
