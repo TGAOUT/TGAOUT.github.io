@@ -1833,7 +1833,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff5e;
+  background: #dd7850;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3131,7 +3131,7 @@ pre .javascript .function {
   }
 }
 body {
-  background: url("/images/backGround.jpg");
+  background: url("http://plq497n2s.bkt.clouddn.com/backGround.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
